@@ -1,7 +1,7 @@
 package com.cumulation.retrofitexample.di
 
-import com.cumulation.retrofitexample.repo.NetworkRepositry
-import com.cumulation.retrofitexample.repo.NetworkRepositryImp
+import com.cumulation.retrofitexample.repo.NetworkRepository
+import com.cumulation.retrofitexample.repo.NetworkRepositoryImp
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -13,5 +13,5 @@ import javax.inject.Singleton
 abstract class RepositroyModel {
     @Binds
     @Singleton
-    abstract fun networkRepo(repo: NetworkRepositryImp): NetworkRepositry
+    abstract fun networkRepo(repo: NetworkRepositoryImp): NetworkRepository
 }

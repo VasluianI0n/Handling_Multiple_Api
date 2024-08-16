@@ -9,7 +9,7 @@ import com.cumulation.retrofitexample.netwok.api.NetworkResult
 import com.cumulation.retrofitexample.netwok.api.convertToDataState
 import com.cumulation.retrofitexample.netwok.model.Genres
 import com.cumulation.retrofitexample.netwok.model.MovieTitles
-import com.cumulation.retrofitexample.repo.NetworkRepositry
+import com.cumulation.retrofitexample.repo.NetworkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RetrofitViewModel @Inject constructor(
-    private val repositry: NetworkRepositry
+    private val repositry: NetworkRepository
 ) : ViewModel() {
     private val _genres: MutableLiveData<DataState<Genres>> = MutableLiveData(DataState.Init)
     var genres: LiveData<DataState<Genres>> = _genres

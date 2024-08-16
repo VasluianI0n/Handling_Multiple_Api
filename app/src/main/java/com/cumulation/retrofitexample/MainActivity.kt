@@ -16,7 +16,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.cumulation.retrofitexample.navigation.SetUpNavigation
 import com.cumulation.retrofitexample.netwok.api.NetworkResult
-import com.cumulation.retrofitexample.repo.NetworkRepositry
 import com.cumulation.retrofitexample.ui.theme.RetrofitExampleTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
