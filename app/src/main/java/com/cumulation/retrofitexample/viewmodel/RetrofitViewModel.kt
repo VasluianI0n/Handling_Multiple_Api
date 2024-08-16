@@ -4,12 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cumulation.retrofitexample.netwok.api.DataState
-import com.cumulation.retrofitexample.netwok.api.NetworkResult
-import com.cumulation.retrofitexample.netwok.api.convertToDataState
-import com.cumulation.retrofitexample.netwok.model.Genres
-import com.cumulation.retrofitexample.netwok.model.MovieTitles
-import com.cumulation.retrofitexample.repo.NetworkRepositry
+import com.cumulation.retrofitexample.network.api.Converter
+import com.cumulation.retrofitexample.network.model.Genres
+import com.cumulation.retrofitexample.network.model.MovieTitles
+import com.cumulation.retrofitexample.repo.NetworkRepository
+import com.example.apihandler.network.api.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -19,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RetrofitViewModel @Inject constructor(
-    private val repositry: NetworkRepositry
+    private val repositry: NetworkRepository
 ) : ViewModel() {
     private val _genres: MutableLiveData<DataState<Genres>> = MutableLiveData(DataState.Init)
     var genres: LiveData<DataState<Genres>> = _genres
@@ -41,9 +40,9 @@ class RetrofitViewModel @Inject constructor(
             _genres.postValue(DataState.Init)
             _movieTitle.postValue(DataState.Init)
             val resultA = async { repositry.getGenres() }
-            _genres.postValue(resultA.await().convertToDataState())
+            _genres.postValue(Converter.convertToDataState(resultA.await()))
             val resultB = async { repositry.getMovieTitles() }
-            _movieTitle.postValue(resultB.await().convertToDataState())
+            _movieTitle.postValue(Converter.convertToDataState(resultB.await()))
         }
     }
 
@@ -54,8 +53,8 @@ class RetrofitViewModel @Inject constructor(
             val resultA = async { repositry.getGenres() }
             val resultB = async { repositry.getMovieTitles() }
             val result = awaitAll(resultA, resultB)
-            _genres.postValue(result[0].convertToDataState() as DataState<Genres>)
-            _movieTitle.postValue(result[1].convertToDataState() as DataState<MovieTitles>)
+            _genres.postValue(Converter.convertToDataState(result[0]) as DataState<Genres>)
+            _movieTitle.postValue(Converter.convertToDataState(result[1]) as DataState<MovieTitles>)
         }
     }
 
@@ -63,13 +62,13 @@ class RetrofitViewModel @Inject constructor(
         viewModelScope.launch {
             _genres.postValue(DataState.Init)
             repositry.getGenres().let { result ->
-                _genres.postValue(result.convertToDataState())
+                _genres.postValue(Converter.convertToDataState(result))
             }
         }
         viewModelScope.launch {
             _movieTitle.postValue(DataState.Init)
             repositry.getMovieTitles().let { result ->
-                _movieTitle.postValue(result.convertToDataState())
+                _movieTitle.postValue(Converter.convertToDataState(result))
             }
         }
     }

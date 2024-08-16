@@ -1,7 +1,8 @@
 package com.cumulation.retrofitexample.di
 
-import com.cumulation.retrofitexample.netwok.ApiServices
-import com.cumulation.retrofitexample.netwok.api.HeaderInterceptor
+
+import com.cumulation.retrofitexample.network.ApiServices
+import com.cumulation.retrofitexample.network.api.HeaderInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +26,7 @@ class NetworkDI {
     @Singleton
     @Provides
     fun interpt(): Interceptor {
-        return HeaderInterceptor
+        return HeaderInterceptor()
     }
 
     @Singleton

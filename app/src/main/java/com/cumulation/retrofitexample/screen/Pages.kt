@@ -10,14 +10,14 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import com.cumulation.retrofitexample.netwok.api.DataState
-import com.cumulation.retrofitexample.netwok.model.Genres
-import com.cumulation.retrofitexample.netwok.model.MovieTitles
+import com.cumulation.retrofitexample.network.model.Genres
+import com.cumulation.retrofitexample.network.model.MovieTitles
 import com.cumulation.retrofitexample.screen.componets.CardWithText
 import com.cumulation.retrofitexample.screen.componets.CircularLoader
 import com.cumulation.retrofitexample.screen.componets.HeaderText
 import com.cumulation.retrofitexample.screen.componets.IndicatorWithErrorMessage
 import com.cumulation.retrofitexample.viewmodel.RetrofitViewModel
+import com.example.apihandler.network.api.DataState
 
 @Composable
 fun Pages(viewModel: RetrofitViewModel) {
